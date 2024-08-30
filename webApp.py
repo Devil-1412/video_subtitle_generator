@@ -13,12 +13,14 @@ st.title("Video Subtitle Generator")
 
 # File upload
 uploaded_file = st.file_uploader("Upload a video file", type=["mp4", "avi", "mov", "mkv"])
-subtitle_file = os.path.splitext(uploaded_file.name)[0] + ".srt"
-extracted_audio = os.path.splitext(uploaded_file.name)[0] + ".mp3"
-sub_file_path = os.path.join(OUTPUT_FOLDER, subtitle_file)
-audio_path = os.path.join(OUTPUT_FOLDER, extracted_audio)
 
 if uploaded_file is not None:
+    # Configure file paths
+    subtitle_file = os.path.splitext(uploaded_file.name)[0] + ".srt"
+    extracted_audio = os.path.splitext(uploaded_file.name)[0] + ".mp3"
+    sub_file_path = os.path.join(OUTPUT_FOLDER, subtitle_file)
+    audio_path = os.path.join(OUTPUT_FOLDER, extracted_audio)
+    
     # Save the uploaded file
     video_path = os.path.join(UPLOAD_FOLDER, uploaded_file.name)
     with open(video_path, "wb") as f:
