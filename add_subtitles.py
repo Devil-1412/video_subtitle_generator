@@ -28,6 +28,7 @@ class AddSubtitles:
         - output_file (str): The path to the output video file with subtitles.
         """
         print(f"Adding subtitles from {self.subtitle_file} to {self.video_file}...")
+        # Add your path to ffmpeg
         ffmpeg_path = r"C:\Users\hp\Downloads\ffmpeg-N-114855-g35ae44c615-win64-gpl\ffmpeg-N-114855-g35ae44c615-win64-gpl\bin\ffmpeg.exe"
         try:
             subprocess.run([
