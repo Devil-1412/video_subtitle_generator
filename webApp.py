@@ -1,7 +1,7 @@
 import streamlit as st
 from audio_extractor import AudioExtractor
 from speech_to_text import SpeechToText
-from add_subtitles import AddSubtitles
+# from add_subtitles import AddSubtitles
 import os
 
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
@@ -42,20 +42,20 @@ if uploaded_file is not None:
     st.write("Converting audio to text and generating subtitles...")
     stt = SpeechToText(model_name='base')
 
-    subtitle_file = stt.convert_audio_to_text(extracted_audio_path, sub_file_path)
-    output_video_file = os.path.join(OUTPUT_FOLDER, 'video_with_subtitles.mp4')
+    stt.convert_audio_to_text(extracted_audio_path, sub_file_path)
+    # output_video_file = os.path.join(OUTPUT_FOLDER, 'video_with_subtitles.mp4')
 
-    # Add subtitles to video
-    st.write("Adding subtitles to video...")
-    adder = AddSubtitles(video_path, subtitle_file)
-    adder.add_subtitles(output_video_file)
+    # # Add subtitles to video (use only when ffmpeg path is provided to AddSubtitles)
+    # st.write("Adding subtitles to video...")
+    # adder = AddSubtitles(video_path, subtitle_file)
+    # adder.add_subtitles(output_video_file)
 
     # Provide a download link for the video with subtitles
-    st.write("Processing complete! Download your video with subtitles:")
-    with open(output_video_file, "rb") as f:
+    st.write("Processing complete! Download subtitles for your video:")
+    with open(sub_file_path, "rb") as f:
         st.download_button(
-            label="Download video with subtitles",
+            label="Download subtitles",
             data=f,
-            file_name=f"Subtitled {uploaded_file.name}",
-            mime="video/mp4"
+            file_name={subtitle_file},
+            mime="subtitle/srt"
         )
